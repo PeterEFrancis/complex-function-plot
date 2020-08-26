@@ -21,6 +21,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"></script>
 
   <!-- schemes -->
+  <script src="js/cool_functions.js"></script>
   <script src="js/scheme_functions.js"></script>
 
 
@@ -30,8 +31,9 @@
     }
     #output {
       border: 1px solid black;
-      width: 100%;
       max-height: 1000px;
+      max-width: 100%;
+      min-width: 50%;
     }
   </style>
 
@@ -72,7 +74,7 @@
         </div>
       </div>
       <div class="input-group" style="margin-bottom: 40px">
-        <span class="input-group-addon">Discretized at</span>
+        <span class="input-group-addon">Discretize with</span>
         <input id="disc-re" type="number" class="form-control" value="100"/>
         <span class="input-group-addon" style="user-select:none;">\(\times\)</span>
         <input id="disc-im" type="number" class="form-control" value="100"/>
@@ -81,13 +83,24 @@
       <div class="row" style="margin-bottom: 40px">
         <div class="col-xs-8">
           <h4>Domain Color Schemes</h4>
-          <input type="radio" id="phase" name="scheme" value="0" checked>
-          <label for="phase">&nbsp; Phase</label><br>
-          <input type="radio" id="phase_and_modulus" name="scheme" value="1">
-          <label for="phase_and_modulus">&nbsp; Phase and Modulus</label><br>
-          <input type="radio" id="cartesian_checkerboard" name="scheme" value="2">
-          <label for="cartesian_checkerboard">&nbsp; Cartesian Checkerboard</label><br>
-
+          <input type="radio" id="standard_domain_coloring" name="scheme" value="standard_domain_coloring" checked>
+            <label for="standard_domain_coloring">&nbsp; Standard Domain Coloring</label><br>
+          <input type="radio" id="phase" name="scheme" value="phase">
+            <label for="phase">&nbsp; Phase</label><br>
+          <input type="radio" id="phase_and_modulus" name="scheme" value="phase_and_modulus">
+            <label for="phase_and_modulus">&nbsp; Phase and Modulus</label><br>
+          <input type="radio" id="cartesian_checkerboard" name="scheme" value="cartesian_checkerboard">
+            <label for="cartesian_checkerboard">&nbsp; Cartesian Checkerboard</label><br>
+          <input type="radio" id="real_stripes" name="scheme" value="real_stripes">
+            <label for="real_stripes">&nbsp; Real Stripes</label><br>
+          <input type="radio" id="imaginary_stripes" name="scheme" value="imaginary_stripes">
+            <label for="imaginary_stripes">&nbsp; Imaginary Stripes</label><br>
+          <input type="radio" id="alternating_modulus" name="scheme" value="alternating_modulus">
+            <label for="alternating_modulus">&nbsp; Alternating Modulus</label><br>
+          <input type="radio" id="alternating_phase" name="scheme" value="alternating_phase">
+            <label for="alternating_phase">&nbsp; Alternating Phase</label><br>
+          <input type="radio" id="polar_chessboard" name="scheme" value="polar_chessboard">
+            <label for="polar_chessboard">&nbsp; Polar Chessboard</label><br>
           <br><br>
           <label for="resolution">Resolution: </label><br>
           <input id="resolution" type="range" min="1" max="15" value="10" oninput="set_resolution(this.value)"/>
@@ -100,11 +113,11 @@
         Show <span class="glyphicon glyphicon-arrow-right"><span>
       </button>
       <p id="error" style="color: red">&nbsp;</p>
-      <button onclick="download_image(); console.log(1);" type="button" class="btn btn-default btn-block"><span class="glyphicon glyphicon-download-alt"></span> Download Image</button>
+      <button onclick="download_image();" type="button" class="btn btn-default btn-block"><span class="glyphicon glyphicon-download-alt"></span> Download Image</button>
 
     </div>
     <div class="col-md-6">
-      <canvas id="output" width="500" height="500"></canvas>
+      <canvas id="output" class="center-block"></canvas>
       <p class="text-center" id="hover-loc"></p>
     </div>
   </div>

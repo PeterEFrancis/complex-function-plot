@@ -36,7 +36,7 @@ function get_settings() {
   depth_re = Math.pow(10, Math.round(Math.log(zoom_re) / Math.log(10)));
   depth_im = Math.pow(10, Math.round(Math.log(zoom_im) / Math.log(10)));
 
-  scheme = SCHEMES[document.querySelector('input[name="scheme"]:checked').value];
+  set_scheme(document.querySelector('input[name="scheme"]:checked').value);
   resolution = Number(document.getElementById('resolution').value);
 }
 
@@ -68,11 +68,15 @@ output_canvas.addEventListener('mouseout', function() {
 });
 
 output_canvas.addEventListener('mousemove', function(e) {
-  var rect = output_canvas.getBoundingClientRect();
-  var user_x = (e.clientX - rect.left) * (output_canvas.width / output_canvas.clientWidth);
-  var user_y = (e.clientY - rect.top) * (output_canvas.height / output_canvas.clientHeight);
-  var p = get_C_point({x:user_x, y:user_y});
-  document.getElementById('hover-loc').innerHTML = "f(" + toString(round(p, depth_re, depth_im)) + ") = " + toString(round(evaluate(func, p), depth_re, depth_im));
+  try {
+    var rect = output_canvas.getBoundingClientRect();
+    var user_x = (e.clientX - rect.left) * (output_canvas.width / output_canvas.clientWidth);
+    var user_y = (e.clientY - rect.top) * (output_canvas.height / output_canvas.clientHeight);
+    var p = get_C_point({x:user_x, y:user_y});
+    document.getElementById('hover-loc').innerHTML = "f(" + toString(round(p, depth_re, depth_im)) + ") = " + toString(round(evaluate(func, p), depth_re, depth_im));
+  } catch(e) {
+    // if no image is loaded, this wont work, so this is ok
+  }
 });
 
 
@@ -120,8 +124,8 @@ function download_image() {
   window.location.href = image;
 }
 
-function set_scheme(scheme_num) {
-  scheme = SCHEMES[scheme_num];
+function set_scheme(scheme_name) {
+  scheme = eval(scheme_name);
 }
 
 function set_resolution(res) {
@@ -146,9 +150,10 @@ function preview_domain() {
 
 
 
-guppy_input.engine.set_content('<m v="1.2.0"><e></e><f type="exponential" group="functions"><b p="latex">{<r ref="1"/>}^{<r ref="2"/>}</b><b p="asciimath">(<r ref="1"/>)^(<r ref="2"/>)</b><c up="2" bracket="yes" delete="1" name="base"><e>z</e></c><c down="1" delete="1" name="exponent" small="yes"><e>2</e></c></f><e></e></m>');
+guppy_input.engine.set_content(z_squared);
 guppy_input.engine.end();
 guppy_input.render(true);
+
 
 get_settings();
 preview_domain();
