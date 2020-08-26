@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Complex Function Phase Plot</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <!-- mathjs -->
+  <script src="https://unpkg.com/mathjs/dist/math.min.js"></script>
+
+  <!-- Guppy -->
+  <link rel="stylesheet" href="https://guppy.js.org/build/guppy-default.min.css">
+  <script type="text/javascript" src="https://guppy.js.org/build/guppy.min.js"></script>
+
+  <!-- Mathjax -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"></script>
+
+  <!-- schemes -->
+  <script src="js/scheme_functions.js"></script>
+
+
+  <style>
+    br {
+      user-select: none;
+    }
+    #output {
+      border: 1px solid black;
+      width: 100%;
+      max-height: 1000px;
+    }
+  </style>
+
+</head>
+<body>
+
+<div class="container">
+  <div class="row" style="margin-bottom: 40px;">
+    <div class="col-md-12">
+      <h1>Complex Function Phase Plot</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6" style="margin-bottom: 40px">
+      <div class="row" style="margin-bottom: 40px;">
+        <div class="col-xs-2" style="padding-right: 5px;">
+          <span style="font-size: 1.5em; line-height: 2em">\(f(z)=\)</span>
+        </div>
+        <div class="col-xs-10" style="padding-left: 0px;">
+          <div id="guppy-function-input" style="width: 100%"></div>
+        </div>
+      </div>
+      <div class="row" style="margin-bottom: 40px;">
+        <div class="col-xs-6">
+          <div class="input-group">
+            <input id="re-lb" type="number" class="form-control" value="-2"/>
+            <span class="input-group-addon">\(\leq \text{Re}(z)\leq\)</span>
+            <input id="re-ub" type="number" class="form-control" value="2"/>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="input-group">
+            <input id="im-lb" type="number" class="form-control" value="-2"/>
+            <span class="input-group-addon">\(\leq \text{Im}(z)\leq\)</span>
+            <input id="im-ub" type="number" class="form-control" value="2"/>
+          </div>
+        </div>
+      </div>
+      <div class="input-group" style="margin-bottom: 40px">
+        <span class="input-group-addon">Discretized at</span>
+        <input id="disc-re" type="number" class="form-control" value="100"/>
+        <span class="input-group-addon" style="user-select:none;">\(\times\)</span>
+        <input id="disc-im" type="number" class="form-control" value="100"/>
+        <span class="input-group-addon">pixels</span>
+      </div>
+      <div class="row" style="margin-bottom: 40px">
+        <div class="col-xs-8">
+          <h4>Domain Color Schemes</h4>
+          <input type="radio" id="phase" name="scheme" value="0" checked>
+          <label for="phase">&nbsp; Phase</label><br>
+          <input type="radio" id="phase_and_modulus" name="scheme" value="1">
+          <label for="phase_and_modulus">&nbsp; Phase and Modulus</label><br>
+          <input type="radio" id="cartesian_checkerboard" name="scheme" value="2">
+          <label for="cartesian_checkerboard">&nbsp; Cartesian Checkerboard</label><br>
+
+          <br><br>
+          <label for="resolution">Resolution: </label><br>
+          <input id="resolution" type="range" min="1" max="15" value="10" oninput="set_resolution(this.value)"/>
+        </div>
+        <div class="col-xs-4">
+          <canvas id="domain" style="border: 1px solid black; width: 100%;" width="100" height="100"></canvas>
+        </div>
+      </div>
+      <button type="button" class="btn btn-default btn-lg btn-block" onclick="show()">
+        Show <span class="glyphicon glyphicon-arrow-right"><span>
+      </button>
+      <p id="error" style="color: red">&nbsp;</p>
+      <button onclick="download_image(); console.log(1);" type="button" class="btn btn-default btn-block"><span class="glyphicon glyphicon-download-alt"></span> Download Image</button>
+
+    </div>
+    <div class="col-md-6">
+      <canvas id="output" width="500" height="500"></canvas>
+      <p class="text-center" id="hover-loc"></p>
+    </div>
+  </div>
+
+  <!-- <br><br>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>About</h3>
+      <p>Some about text.</p>
+    </div>
+  </div> -->
+
+  <br><br><br><br>
+</div>
+
+<script src="js/engine.js"></script>
+
+
+
+</body>
+</html>
