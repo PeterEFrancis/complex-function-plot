@@ -81,7 +81,7 @@ output_canvas.addEventListener('mousemove', function(e) {
 
 
 function evaluate(string, z) {
-  return math.evaluate(string.replace(/z/g,'(' + z.re + '+' + z.im + 'i)'));
+  return math.evaluate(string.replace(/z/g,'(' + z.re + '+' + z.im + 'i)').replace(/neg/g,'(-1)*'));
 }
 
 
@@ -149,7 +149,7 @@ function preview_domain() {
 
 
 
-
+guppy_input.engine.add_symbol("conj", {"output": {"latex":"\\overline{{$1}}", "text":"conj($1)"}, "attrs": { "type":"conj", "group":"function"}});
 guppy_input.engine.set_content(z_squared);
 guppy_input.engine.end();
 guppy_input.render(true);
