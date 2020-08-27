@@ -87,6 +87,7 @@ function evaluate(string, z) {
 
 function show() {
 
+
   output_ctx.clearRect(0, 0, output_canvas.width, output_canvas.height);
 
   try {
