@@ -1,4 +1,7 @@
 
+// Thank you, https://github.com/infusion/Complex.js/blob/10d2a84bbf281b53ea4ce0993d0794922e214daf/complex.js
+
+
 // real -> real functions
 
 function r_cosh(x) {

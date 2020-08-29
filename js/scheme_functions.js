@@ -5,7 +5,7 @@
 function phase(p, r) {
   // get polar coord.
   //      theta  =  Hue
-  var theta = Math.atan(p.im/p.re) + 2 * math.PI;
+  var theta = Math.atan(p.im/p.re) + 2 * Math.PI;
   if (p.re < 0) {
     theta += Math.PI;
   }
@@ -38,7 +38,7 @@ function phase_and_modulus(p, r) {
   // get polar coord.
   //      theta  =  Hue
   //        mod  =  saturation
-  var theta = Math.atan(p.im/p.re) + 2 * math.PI;
+  var theta = Math.atan(p.im/p.re) + 2 * Math.PI;
   if (p.re < 0) {
     theta += Math.PI;
   }
@@ -72,7 +72,7 @@ function alternating_modulus(p, r) {
 }
 
 function alternating_phase(p, r) {
-  var theta = Math.atan(p.im/p.re) + 2 * math.PI;
+  var theta = Math.atan(p.im/p.re) + 2 * Math.PI;
   if (p.re < 0) {
     theta += Math.PI;
   }
