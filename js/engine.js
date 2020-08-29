@@ -118,7 +118,11 @@ function show() {
 }
 
 function download_output() {
-  window.location.href = output_canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+  var link = document.createElement('a');
+  link.download = 'complex-function-phase-plot.png';
+  link.href = output_canvas.toDataURL();
+  link.click();
+  // window.location.href = output_canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
 }
 
 
