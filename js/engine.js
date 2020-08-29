@@ -73,16 +73,17 @@ output_canvas.addEventListener('mousemove', function(e) {
     var user_x = (e.clientX - rect.left) * (output_canvas.width / output_canvas.clientWidth);
     var user_y = (e.clientY - rect.top) * (output_canvas.height / output_canvas.clientHeight);
     var p = get_C_point({x:user_x, y:user_y});
-    document.getElementById('hover-loc').innerHTML = "f(" + toString(round(p, depth_re, depth_im)) + ") = " + toString(round(evaluate(func, p), depth_re, depth_im));
+    document.getElementById('hover-loc').innerHTML = "f(" + toString(round(p, depth_re, depth_im)) + ") = " + toString(round(func(p), depth_re, depth_im));
   } catch(e) {
     // if no image is loaded, this wont work, so this is ok
   }
 });
 
 
-function evaluate(string, z) {
-  return math.evaluate(string.replace(/z/g,'(' + z.re + '+' + z.im + 'i)').replace(/neg/g,'(-1)*'));
-}
+// function evaluate(func_string, z) {
+//   return math.evaluate(func_string.replace(/z/g,'(' + z.re + '+' + z.im + 'i)').replace(/neg/g,'(-1)*'));
+// }
+
 
 
 function show() {
@@ -90,32 +91,33 @@ function show() {
 
   output_ctx.clearRect(0, 0, output_canvas.width, output_canvas.height);
 
-  try {
+  // try {
 
     document.getElementById('error').innerHTML = "&nbsp;";
 
     // parse with guppy
-    try {
-      func = guppy_input.engine.get_content('text');
-    } catch(e) {
-      throw "Error parsing the input f(z)";
-    }
+    // try {
+      var f = guppy_input.func(complex_operations);
+      func = function(z) {
+        return f({'z':z});
+      }
+    // } catch(e) {
+    //   throw "Error parsing the input f(z)";
+    // }
 
     get_settings();
 
     // iterate over points in the output display, and plot the color associated with their output of f
     for (var i = 0; i < disc_re; i++) {
       for (var j = 0; j < disc_im; j++) {
-        const z = get_C_point({x:i,y:j});
-        const f_z = evaluate(func, z);
-        output_ctx.fillStyle = scheme(f_z, resolution);
+        output_ctx.fillStyle = scheme(func(get_C_point({x:i,y:j})), resolution);
         this.output_ctx.fillRect(i, j, 1, 1);
       }
     }
-
-  } catch(e) {
-    document.getElementById('error').innerHTML = e;
-  }
+  //
+  // } catch(e) {
+  //   document.getElementById('error').innerHTML = e;
+  // }
 
 
 }
@@ -151,7 +153,7 @@ function preview_domain() {
 
 
 guppy_input.engine.add_symbol("conj", {"output": {"latex":"\\overline{{$1}}", "text":"conj($1)"}, "attrs": { "type":"conj", "group":"function"}});
-guppy_input.engine.set_content(z_squared);
+guppy_input.engine.set_content('<m v="1.2.0"><e>z+z</e></m>');
 guppy_input.engine.end();
 guppy_input.render(true);
 

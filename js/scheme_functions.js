@@ -86,3 +86,8 @@ function polar_chessboard(p, r) {
   }
   return "black";
 }
+
+
+
+
+// image part
