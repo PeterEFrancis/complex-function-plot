@@ -1,4 +1,11 @@
 
+
+function get_color(p) {
+  return scheme(p, resolution);
+}
+
+
+
 // p is a point in C, and r is a resolution measure (sometimes not needed)
 
 
@@ -89,8 +96,13 @@ function polar_chessboard(p, r) {
 
 
 
+function image(p, r, v) {
 
-function get_image_pixel_color(i, j) {
+  const i = Math.round(p.re * r**3) + image_center_x;
+  const j = image_center_y - Math.round(p.im * r ** 3);
+
+  if (v) console.log(i + " " + j);
+
   // i and j are the pixel coordinates
   if (!image_obj || i >= image_width || i < 0 || j >= image_height || j < 0) {
     return "black";
@@ -103,15 +115,4 @@ function get_image_pixel_color(i, j) {
 
   return "rgba(" + red + "," + green + "," + blue + "," + alpha + ")";
 
-}
-
-
-function image(p, r, v) {
-
-  const i = Math.round(p.re * r**3) + image_center_x;
-  const j = image_center_y - Math.round(p.im * r ** 3);
-
-  if (v) console.log(i + " " + j);
-
-  return get_image_pixel_color(i,j);
 }

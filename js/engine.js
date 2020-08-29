@@ -86,33 +86,33 @@ function show() {
 
   output_ctx.clearRect(0, 0, output_canvas.width, output_canvas.height);
 
-  // try {
+  try {
 
     document.getElementById('error').innerHTML = "&nbsp;";
 
     // parse with guppy
-    // try {
+    try {
       var f = guppy_input.func(complex_operations);
       func = function(z) {
         return f({'z':z});
       }
-    // } catch(e) {
-    //   throw "Error parsing the input f(z)";
-    // }
+    } catch(e) {
+      throw "Error parsing the input f(z)";
+    }
 
     get_settings();
 
     // iterate over points in the output display, and plot the color associated with their output of f
     for (var i = 0; i < disc_re; i++) {
       for (var j = 0; j < disc_im; j++) {
-        output_ctx.fillStyle = scheme(func(get_C_point({x:i,y:j})), resolution);
+        output_ctx.fillStyle = get_color(func(get_C_point({x:i,y:j})));
         this.output_ctx.fillRect(i, j, 1, 1);
       }
     }
-  //
-  // } catch(e) {
-  //   document.getElementById('error').innerHTML = e;
-  // }
+
+  } catch(e) {
+    document.getElementById('error').innerHTML = e;
+  }
 
 
 }
@@ -156,6 +156,8 @@ function loadFile(event) {
   }
 }
 
+
+
 function set_scheme(scheme_name) {
   scheme = eval(scheme_name);
   preview_domain();
@@ -173,7 +175,7 @@ function preview_domain() {
     for (var j = 0; j < domain_canvas.height; j++) {
       var re = i / (domain_canvas.width / 2) - 1;
       var im = 1 - j / (domain_canvas.width / 2);
-      domain_ctx.fillStyle = scheme({re:re, im:im}, resolution);
+      domain_ctx.fillStyle = get_color({re:re, im:im});
       domain_ctx.fillRect(i, j, 1, 1);
     }
   }

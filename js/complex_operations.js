@@ -1,6 +1,10 @@
 
 // Thank you, https://github.com/infusion/Complex.js/blob/10d2a84bbf281b53ea4ce0993d0794922e214daf/complex.js
 
+// guppy AST: https://guppy.js.org/build/coverage/src/ast.js.html
+
+
+
 
 // real -> real functions
 
@@ -33,14 +37,20 @@ function logHypot(a) {
 
 
 
-
-
-
-// complex -> complex functions
+// complex -> boolean
 
 function isZero(a) {
   return a.re == 0 && a.im == 0;
 }
+
+function isInfinity(a) {
+  return (a.re == Infinity || a.im == Infinity || isNaN(a.re) || isNaN(a.im));
+}
+
+
+// complex -> complex functions
+
+
 function add(a,b) {
   return {re: a.re + b.re,
           im: a.im + b.im}
