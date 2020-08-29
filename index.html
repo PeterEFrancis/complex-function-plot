@@ -10,9 +10,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-  <!-- mathjs -->
-  <script src="https://unpkg.com/mathjs/dist/math.min.js"></script>
-
   <!-- Guppy -->
   <link rel="stylesheet" href="https://guppy.js.org/build/guppy-default.min.css">
   <script type="text/javascript" src="https://guppy.js.org/build/guppy.min.js"></script>
@@ -102,6 +99,9 @@
             <label for="alternating_phase">&nbsp; Alternating Phase</label><br>
           <input type="radio" id="polar_chessboard" name="scheme" value="polar_chessboard">
             <label for="polar_chessboard">&nbsp; Polar Chessboard</label><br>
+          <input type="radio" id="image" name="scheme" value="image">
+            <label for="image">&nbsp; Image</label><br>
+            <input id="image-file" type="file" accept=".png,.jpg," onchange="loadFile(event)">
           <br>
         </div>
         <div class="col-xs-6">
@@ -120,7 +120,7 @@
     <div class="col-md-6">
       <canvas id="output" class="center-block"></canvas>
       <p class="text-center" id="hover-loc">&nbsp;</p>
-      <button onclick="download_image();" type="button" class="btn btn-default center-block"><span class="glyphicon glyphicon-download-alt"></span> Download Image</button>
+      <button onclick="download_output();" type="button" class="btn btn-default center-block"><span class="glyphicon glyphicon-download-alt"></span> Download Image</button>
     </div>
   </div>
 

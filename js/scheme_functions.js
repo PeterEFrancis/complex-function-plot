@@ -18,7 +18,7 @@ function phase(p, r) {
 function standard_domain_coloring(p, r) {
   // get polar coord.
   //      theta  =  Hue
-  var theta = Math.atan(p.im/p.re) + 2 * math.PI;
+  var theta = Math.atan(p.im/p.re) + 2 * Math.PI;
   if (p.re < 0) {
     theta += Math.PI;
   }
@@ -90,4 +90,28 @@ function polar_chessboard(p, r) {
 
 
 
-// image part
+function get_image_pixel_color(i, j) {
+  // i and j are the pixel coordinates
+  if (!image_obj || i >= image_width || i < 0 || j >= image_height || j < 0) {
+    return "black";
+  }
+
+  const red = image_data.data[j * image_width * 4 + i * 4];
+  const green = image_data.data[j * image_width * 4 + i * 4 + 1];
+  const blue = image_data.data[j * image_width * 4 + i * 4 + 2];
+  const alpha = image_data.data[j * image_width * 4 + i * 4 + 3];
+
+  return "rgba(" + red + "," + green + "," + blue + "," + alpha + ")";
+
+}
+
+
+function image(p, r, v) {
+
+  const i = Math.round(p.re * r**3) + image_center_x;
+  const j = image_center_y - Math.round(p.im * r ** 3);
+
+  if (v) console.log(i + " " + j);
+
+  return get_image_pixel_color(i,j);
+}

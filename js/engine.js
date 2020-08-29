@@ -80,11 +80,6 @@ output_canvas.addEventListener('mousemove', function(e) {
 });
 
 
-// function evaluate(func_string, z) {
-//   return math.evaluate(func_string.replace(/z/g,'(' + z.re + '+' + z.im + 'i)').replace(/neg/g,'(-1)*'));
-// }
-
-
 
 function show() {
 
@@ -122,13 +117,44 @@ function show() {
 
 }
 
-function download_image() {
-  var image = output_canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-  window.location.href = image;
+function download_output() {
+  window.location.href = output_canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+}
+
+
+var image_obj;
+var image_data = [];
+var image_width;
+var image_height;
+var image_center_x;
+var image_center_y;
+var image_pixel_data;
+
+function loadFile(event) {
+  if (event.target.files.length == 0) {
+    return;
+  }
+  image_obj = new Image();
+  image_obj.src = URL.createObjectURL(event.target.files[0]);
+  image_obj.onload = function() {
+    var c = document.createElement('canvas');
+    c.width = image_obj.width;
+    c.height = image_obj.height;
+    var ct = c.getContext('2d');
+    ct.drawImage(image_obj, 0, 0, c.width, c.height);
+    image_data = ct.getImageData(0,0,c.width,c.height);
+    image_width = image_data.width;
+    image_height = image_data.height;
+    image_center_x = Math.floor(image_width / 2);
+    image_center_y = Math.floor(image_height / 2);
+    set_scheme('image');
+    document.getElementById('image').checked = true;
+  }
 }
 
 function set_scheme(scheme_name) {
   scheme = eval(scheme_name);
+  preview_domain();
 }
 
 function set_resolution(res) {
@@ -137,6 +163,7 @@ function set_resolution(res) {
 }
 
 function preview_domain() {
+  domain_ctx.clearRect(0,0,domain_canvas.width, domain_canvas.height);
   // always between -1, and 1 in both directions
   for (var i = 0; i < domain_canvas.width; i++) {
     for (var j = 0; j < domain_canvas.height; j++) {
@@ -153,7 +180,7 @@ function preview_domain() {
 
 
 guppy_input.engine.add_symbol("conj", {"output": {"latex":"\\overline{{$1}}", "text":"conj($1)"}, "attrs": { "type":"conj", "group":"function"}});
-guppy_input.engine.set_content('<m v="1.2.0"><e>z+z</e></m>');
+guppy_input.engine.set_content(fractions);
 guppy_input.engine.end();
 guppy_input.render(true);
 
@@ -166,6 +193,5 @@ var radios = document.getElementsByName('scheme');
 for (var i = 0; i < radios.length; i++) {
   radios[i].onclick = function() {
     set_scheme(this.value);
-    preview_domain();
   }
 }
