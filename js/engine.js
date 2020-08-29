@@ -81,7 +81,7 @@ output_canvas.addEventListener('mousemove', function(e) {
 
 
 
-function show() {
+function render() {
 
 
   output_ctx.clearRect(0, 0, output_canvas.width, output_canvas.height);
