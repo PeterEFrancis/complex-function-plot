@@ -96,15 +96,25 @@ function polar_chessboard(p, r) {
 
 
 
-function image(p, r, v) {
 
-  const i = Math.round(p.re * r**3) + image_center_x;
-  const j = image_center_y - Math.round(p.im * r ** 3);
 
-  if (v) console.log(i + " " + j);
+
+// relies on vars in engine.js
+
+function proper_mod(a, m) {
+  return (((a % m) + m) % m);
+}
+
+function image(p, r) {
 
   // i and j are the pixel coordinates
-  if (!image_obj || i >= image_width || i < 0 || j >= image_height || j < 0) {
+  var i = Math.round(p.re * r**3) + image_center_x;
+  var j = image_center_y - Math.round(p.im * r ** 3);
+
+  if (image_tiling) {
+    i = proper_mod(i, image_width);
+    j = proper_mod(j, image_height);
+  } else if (!image_obj || i >= image_width || i < 0 || j >= image_height || j < 0) {
     return "black";
   }
 

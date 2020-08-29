@@ -18,6 +18,18 @@ var depth_re, depth_im;
 var scheme;
 var resolution;
 
+
+var image_obj;
+var image_data = [];
+var image_width;
+var image_height;
+var image_center_x;
+var image_center_y;
+var image_pixel_data;
+
+var image_tiling;
+
+
 function get_settings() {
 
   re_lb = Number(document.getElementById('re-lb').value);
@@ -38,6 +50,9 @@ function get_settings() {
 
   set_scheme(document.querySelector('input[name="scheme"]:checked').value);
   resolution = Number(document.getElementById('resolution').value);
+
+  tile = document.getElementById('image-tiling').checked;
+
 }
 
 
@@ -126,14 +141,6 @@ function download_output() {
 }
 
 
-var image_obj;
-var image_data = [];
-var image_width;
-var image_height;
-var image_center_x;
-var image_center_y;
-var image_pixel_data;
-
 function loadFile(event) {
   if (event.target.files.length == 0) {
     return;
@@ -158,15 +165,24 @@ function loadFile(event) {
 
 
 
+
 function set_scheme(scheme_name) {
   scheme = eval(scheme_name);
   preview_domain();
 }
 
+
 function set_resolution(res) {
   resolution = Number(res);
   preview_domain();
 }
+
+
+function set_image_tiling(bool) {
+  image_tiling = bool;
+  preview_domain();
+}
+
 
 function preview_domain() {
   domain_ctx.clearRect(0,0,domain_canvas.width, domain_canvas.height);
@@ -194,7 +210,6 @@ guppy_input.render(true);
 get_settings();
 preview_domain();
 
-// set up preview domain
 var radios = document.getElementsByName('scheme');
 for (var i = 0; i < radios.length; i++) {
   radios[i].onclick = function() {

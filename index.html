@@ -109,6 +109,9 @@
           <br>
           <label for="resolution">Resolution: </label><br>
           <input id="resolution" type="range" min="1" max="15" value="10" oninput="set_resolution(this.value)"/>
+          <input type="checkbox" id="image-tiling" onchange="set_image_tiling(this.checked);"/>
+          <label for="image-tiling"> Tile Image</label>
+
         </div>
       </div>
       <button type="button" class="btn btn-default btn-lg btn-block" onclick="render()">Render</button>
