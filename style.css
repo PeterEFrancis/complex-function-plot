@@ -1,0 +1,33 @@
+:root {
+  --lightblue: rgb(73, 140, 160);
+  --green: rgb(0, 86, 32);
+  --darkblue: rgb(30, 62, 91)
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
+body {
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+
+
+br {
+  user-select: none;
+}
+
+
+.btn-primary {
+   background-color: var(--darkblue);
+   transition: 0.5s ease;
+
+}
+
+.btn-primary:hover {
+  transition: 0.5s ease;
+}
+
+
+p, li {
+  font-size: 14pt;
+}

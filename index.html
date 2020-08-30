@@ -10,134 +10,105 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-  <!-- Guppy -->
-  <link rel="stylesheet" href="https://guppy.js.org/build/guppy-default.min.css">
-  <script type="text/javascript" src="https://guppy.js.org/build/guppy.min.js"></script>
-
   <!-- Mathjax -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"></script>
 
-  <!-- my stuff -->
-  <script src="js/cool_functions.js"></script>
-  <script src="js/scheme_functions.js"></script>
-  <script src="js/complex_operations.js"></script>
+
+  <link rel="stylesheet" href="style.css">
 
 
   <style>
-    br {
-      user-select: none;
+
+
+    body {
+      min-width: 220px;
     }
-    #output {
-      border: 1px solid black;
-      max-height: 1000px;
-      max-width: 100%;
-      min-width: 50%;
+
+    #header {
+      background-image: url(img/header.png);
+      color: white;;
     }
+
+    /* #header > h1 {
+      color: white;
+      font-size: 100px;
+    } */
+
+
   </style>
 
 </head>
 <body>
 
-<div class="container">
-  <div class="row" style="margin-bottom: 40px;">
-    <div class="col-md-12">
+
+
+  <div class="container-fluid">
+    <div class="jumbotron" id="header" style="margin: -15px; border-radius: 0px;">
       <h1>Complex Function Plot</h1>
+      <p>Fun and colorful transformations of the complex plane!</p>
+      <iframe src="https://ghbtns.com/github-btn.html?user=peterefrancis&repo=complex-function-plot&type=star&count=false&size=large"
+              frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-6" style="margin-bottom: 40px">
-      <div class="row" style="margin-bottom: 40px;">
-        <div class="col-xs-2" style="padding-right: 5px;">
-          <span style="font-size: 1.5em; line-height: 2em">\(f(z)=\)</span>
-        </div>
-        <div class="col-xs-10" style="padding-left: 0px;">
-          <div id="guppy-function-input" style="width: 100%"></div>
-        </div>
+    <div class="row" style="padding: 100px 0px 100px 0px;">
+      <div class="col-md-4"></div>
+      <div class="col-md-4" id="start-plotting">
+        <button type="button" style="font-size: 30px;"
+                class="btn center-block btn-block btn-lg btn-primary button-primary"
+                onclick="window.location.href='plotter.html'">
+          Start Plotting!
+        </button>
       </div>
-      <div class="row" style="margin-bottom: 40px;">
-        <div class="col-xs-6">
-          <div class="input-group">
-            <input id="re-lb" type="number" class="form-control" value="-2"/>
-            <span class="input-group-addon">\(\leq \text{Re}(z)\leq\)</span>
-            <input id="re-ub" type="number" class="form-control" value="2"/>
-          </div>
-        </div>
-        <div class="col-xs-6">
-          <div class="input-group">
-            <input id="im-lb" type="number" class="form-control" value="-2"/>
-            <span class="input-group-addon">\(\leq \text{Im}(z)\leq\)</span>
-            <input id="im-ub" type="number" class="form-control" value="2"/>
-          </div>
-        </div>
-      </div>
-      <div class="input-group" style="margin-bottom: 40px">
-        <span class="input-group-addon">Discretize with</span>
-        <input id="disc-re" type="number" class="form-control" value="500"/>
-        <span class="input-group-addon" style="user-select:none;">\(\times\)</span>
-        <input id="disc-im" type="number" class="form-control" value="500"/>
-        <span class="input-group-addon">pixels</span>
-      </div>
-      <div class="row" style="margin-bottom: 40px">
-        <div class="col-xs-6">
-          <h4>Domain Color Schemes</h4>
-          <input type="radio" id="standard_domain_coloring" name="scheme" value="standard_domain_coloring" checked>
-            <label for="standard_domain_coloring">&nbsp; Standard Domain Coloring</label><br>
-          <input type="radio" id="phase" name="scheme" value="phase">
-            <label for="phase">&nbsp; Phase</label><br>
-          <input type="radio" id="phase_and_modulus" name="scheme" value="phase_and_modulus">
-            <label for="phase_and_modulus">&nbsp; Phase and Modulus</label><br>
-          <input type="radio" id="cartesian_checkerboard" name="scheme" value="cartesian_checkerboard">
-            <label for="cartesian_checkerboard">&nbsp; Cartesian Checkerboard</label><br>
-          <input type="radio" id="real_stripes" name="scheme" value="real_stripes">
-            <label for="real_stripes">&nbsp; Real Stripes</label><br>
-          <input type="radio" id="imaginary_stripes" name="scheme" value="imaginary_stripes">
-            <label for="imaginary_stripes">&nbsp; Imaginary Stripes</label><br>
-          <input type="radio" id="alternating_modulus" name="scheme" value="alternating_modulus">
-            <label for="alternating_modulus">&nbsp; Alternating Modulus</label><br>
-          <input type="radio" id="alternating_phase" name="scheme" value="alternating_phase">
-            <label for="alternating_phase">&nbsp; Alternating Phase</label><br>
-          <input type="radio" id="polar_chessboard" name="scheme" value="polar_chessboard">
-            <label for="polar_chessboard">&nbsp; Polar Chessboard</label><br>
-          <input type="radio" id="image" name="scheme" value="image">
-            <label for="image">&nbsp; Image</label><br>
-            <input id="image-file" type="file" accept=".png,.jpg," onchange="loadFile(event)">
-          <br>
-        </div>
-        <div class="col-xs-6">
-          <canvas id="domain" style="border: 1px solid black; width: 100%;" width="250" height="250"></canvas>
-          <br>
-          <label for="resolution">Resolution: </label><br>
-          <input id="resolution" type="range" min="1" max="15" value="10" oninput="set_resolution(this.value)"/>
-          <input type="checkbox" id="image-tiling" onchange="set_image_tiling(this.checked);"/>
-          <label for="image-tiling"> Tile Image</label>
-
-        </div>
-      </div>
-      <button type="button" class="btn btn-default btn-lg btn-block" onclick="render()">Render</button>
-      <p id="error" style="color: red">&nbsp;</p>
+      <div class="col-md-4" id="device-no" style="display:none"></div>
+      <div class="col-md-4"></div>
 
     </div>
-    <div class="col-md-6">
-      <canvas id="output" class="center-block"></canvas>
-      <p class="text-center" id="hover-loc">&nbsp;</p>
-      <button onclick="download_output();" type="button" class="btn btn-default center-block"><span class="glyphicon glyphicon-download-alt"></span> Download Image</button>
-    </div>
-  </div>
 
-  <!-- <br><br>
-  <hr>
-  <div class="row">
-    <div class="col-md-12">
-      <h3>About</h3>
-      <p>Some about text.</p>
-    </div>
-  </div> -->
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <h2 class="text-center">About</h2>
+        <p>Transformations from the complex plane \(\mathbb{C}\) to itself can create beautifiul patterns and images in a simple way. First let \(S\) be the set of all colors, and define two functions:</p>
+          <ul>
+            <li>a complex transformation \(f:\mathbb{C}\to\mathbb{C}\), and</li>
+            <li>a domain coloring scheme \(g:\mathbb{C}\to S\).</li>
+          </ul>
+          <p>Then, color the plane with the new coloring map \(g\circ f\).</p>
+          <p>Different domain coloring schemes can drastically change the resulting image.
+             Many use in combination, increments in phase, modulus, real, and imaginary coordinates. However, you can upload any image to use as a domain coloring scheme!</p>
+      </div>
+      <div class="col-md-3"></div>
 
-  <br><br><br><br>
+
+    </div>
+
+    <!-- <div class="row" style="margin: 50px;">
+      <div class="col-md-12">
+        <h2 class="text-center">Gallery</h2>
+        <table>
+          <tr>
+            <td>
+              <img src="img/gallery/treeline-1.png" class="img-responsive">
+            </td>
+          </tr>
+        </table>
+
+      </div>
+
+    </div> -->
+
+
+
 </div>
 
-<script src="js/engine.js"></script>
+<script>
+
+  if (/Android|Mobile|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+    document.getElementById('start-plotting').style.display = "none";
+    document.getElementById('device-no').style.display = "block";
+  }
+
+</script>
 
 
 
