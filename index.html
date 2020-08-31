@@ -29,10 +29,18 @@
       color: white;;
     }
 
-    /* #header > h1 {
-      color: white;
-      font-size: 100px;
-    } */
+    #gallery-table {
+      width: 100%;
+    }
+
+    td {
+      width: 50%;
+    }
+
+    .math-lg {
+      margin-top: 40%;
+      margin-bottom: 40%;
+    }
 
 
   </style>
@@ -52,14 +60,15 @@
 
     <div class="row" style="padding: 100px 0px 100px 0px;">
       <div class="col-md-4"></div>
-      <div class="col-md-4" id="start-plotting">
-        <button type="button" style="font-size: 30px;"
+      <div class="col-md-4">
+        <button type="button" style="font-size: 30px;" id="start-plotting"
                 class="btn center-block btn-block btn-lg btn-primary button-primary"
                 onclick="window.location.href='plotter.html'">
           Start Plotting!
         </button>
+        <br>
+        <p id="device-no" class="text-center" style="display:none">It seems your device won't support plotting.</p>
       </div>
-      <div class="col-md-4" id="device-no" style="display:none"></div>
       <div class="col-md-4"></div>
 
     </div>
@@ -75,36 +84,57 @@
           </ul>
           <p>Then, color the plane with the new coloring map \(g\circ f\).</p>
           <p>Different domain coloring schemes can drastically change the resulting image.
-             Many use in combination, increments in phase, modulus, real, and imaginary coordinates. However, you can upload any image to use as a domain coloring scheme!</p>
+             Many use some combination of increments in phase, modulus, real, and imaginary coordinates. However, you can upload any image to use as a domain coloring scheme!</p>
       </div>
       <div class="col-md-3"></div>
 
 
     </div>
 
-    <!-- <div class="row" style="margin: 50px;">
+    <div class="row" style="margin-top: 100px;">
       <div class="col-md-12">
-        <h2 class="text-center">Gallery</h2>
-        <table>
-          <tr>
-            <td>
-              <img src="img/gallery/treeline-1.png" class="img-responsive">
-            </td>
-          </tr>
-        </table>
-
+        <h2 class="text-center" style="margin-bottom: 60px;">Gallery</h2>
+        <div class="row">
+          <div class="col-sm-6">
+            <h1 class="text-center math-lg">\(f(z)=z^5\)</h1>
+          </div>
+          <div class="col-sm-6">
+            <img src="img/gallery/treeline-1.png" class="img-responsive img-rounded">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-sm-push-6">
+            <h1 class="text-center math-lg">\(f(z)=z^{4z^{3z^{z^{2z^{z}}}}}\)</h1>
+          </div>
+          <div class="col-sm-6 col-sm-pull-6">
+            <img src="img/gallery/late-night.png" class="img-responsive img-rounded">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <h1 class="text-center math-lg">\(f(z)=\frac{i}{z}-\frac{z}{i}\)</h1>
+          </div>
+          <div class="col-sm-6">
+            <img src="img/gallery/S.png" class="img-responsive img-rounded">
+          </div>
+        </div>
       </div>
 
-    </div> -->
+    </div>
 
 
+    <div class="row" style="margin:100px 0px 50px 0px;">
+      <div class="col-md-12">
+        <p class="text-center" style="color: grey">Copyright &copy; 2020 <a style="color:grey; text-decoration: underline;" href="https:PeterEFrancis.com">Peter E. Francis</a></p>
+      </div>
+    </div>
 
 </div>
 
 <script>
 
   if (/Android|Mobile|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-    document.getElementById('start-plotting').style.display = "none";
+    document.getElementById('start-plotting').disabled = true;
     document.getElementById('device-no').style.display = "block";
   }
 
