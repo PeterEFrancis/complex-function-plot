@@ -205,6 +205,16 @@ var complex_operations = {
       return conjugate(args[0](vars));
     }
   },
+  "Re":function(args){
+    return function(vars){
+      return {re:args[0](vars).re,im:0};
+    }
+  },
+  "Im":function(args){
+    return function(vars){
+      return {re:args[0](vars).im,im:0};
+    }
+  },
   "squareroot":function(args){
     return function(vars){
       return exponential(args[0](vars), {re:1/2, im:0});
