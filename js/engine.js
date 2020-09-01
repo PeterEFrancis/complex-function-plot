@@ -30,6 +30,9 @@ var image_pixel_data;
 var image_tiling;
 
 
+var mode = "guppy";
+
+
 function get_settings() {
 
   re_lb = Number(document.getElementById('re-lb').value);
@@ -94,6 +97,33 @@ output_canvas.addEventListener('mousemove', function(e) {
   }
 });
 
+function switch_mode() {
+  if (mode == "guppy") { // turn plain text on
+    document.getElementById('plain-input-group').style.display = "table";
+    document.getElementById('switch-mode').innerHTML = '<a href="#" onclick="switch_mode()" style="color: grey; text-decoration: underline">Switch back to formatted input.</a>';
+    document.getElementById('plain-text-error').innerHTML = "";
+    document.getElementById('plain-text-error').style.display = "block";
+    mode = "plain";
+  } else { // turn off
+    document.getElementById('plain-input-group').style.display = "none";
+    document.getElementById('switch-mode').innerHTML = '\(\LaTeX\) input not working? <a href="#" onclick="switch_mode()" style="color: grey; text-decoration: underline">Use plain text.</a>';
+    document.getElementById('plain-text-error').style.display = "none";
+    mode = "guppy";
+
+  }
+}
+
+
+function load_plain_text() {
+  document.getElementById('plain-text-error').innerHTML = "";
+  try {
+    guppy_input.import_text(document.getElementById('plain-text-input').value);
+    guppy_input.engine.end();
+    guppy_input.render(true);
+  } catch (e) {
+    document.getElementById("plain-text-error").innerHTML = "Parsing Error";
+  }
+}
 
 
 function render() {
@@ -114,6 +144,7 @@ function render() {
     } catch(e) {
       throw "Error parsing the input f(z)";
     }
+
 
     get_settings();
 

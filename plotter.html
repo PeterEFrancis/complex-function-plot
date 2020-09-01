@@ -5,12 +5,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <script>
-
+  <!-- <script>
     if (/Android|Mobile|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
       document.location = 'redirect.html';
     }
-  </script>
+  </script> -->
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -42,15 +41,7 @@
       font-family: 'Roboto', sans-serif;
     }
 
-    br {
-      user-select: none;
-    }
-    #output {
-      border: 1px solid black;
-      max-height: 1000px;
-      max-width: 100%;
-      min-width: 50%;
-    }
+
   </style>
 
 </head>
@@ -72,8 +63,16 @@
           <span style="font-size: 1.5em; line-height: 2em; margin-right: 5px;">\(f(z)=\)</span>
         </div>
         <div class="col-xs-10" style="padding-left: 0px;">
+          <div id="plain-input-group" class="input-group" style="display: none;">
+            <input id="plain-text-input" type="text" class="form-control"/>
+            <span class="input-group-btn">
+              <button class="btn btn-default" onclick="load_plain_text()">Load</button>
+            </span>
+          </div>
           <div id="guppy-function-input" style="width: 100%"></div>
+          <p id="switch-mode" class="text-right" style="color: grey; font-size: 10pt; margin-bottom: 0px;">\(\LaTeX\) input not working? <a href="#" onclick="switch_mode()" style="color: grey; text-decoration: underline">Use plain text.</a></p>
         </div>
+        <p id="plain-text-error" style="color:red; display: none; font-size: 11pt;"></p>
       </div>
       <div class="row" style="margin-bottom: 40px;">
         <div class="col-xs-6">

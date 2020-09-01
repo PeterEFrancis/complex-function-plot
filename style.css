@@ -10,8 +10,6 @@ body {
   font-family: 'Do Hyeon', sans-serif;
 }
 
-
-
 br {
   user-select: none;
 }
@@ -30,4 +28,28 @@ br {
 
 p, li {
   font-size: 14pt;
+}
+
+
+#output {
+  border: 1px solid black;
+  max-height: 1000px;
+  max-width: 100%;
+  min-width: 50%;
+}
+
+
+#header {
+  background-image: url(img/header.png);
+  color: white;;
+}
+
+#gallery-table {
+  width: 100%;
+}
+
+
+.math-lg {
+  margin-top: 40%;
+  margin-bottom: 40%;
 }

@@ -24,24 +24,9 @@
       min-width: 220px;
     }
 
-    #header {
-      background-image: url(img/header.png);
-      color: white;;
-    }
-
-    #gallery-table {
-      width: 100%;
-    }
-
     td {
       width: 50%;
     }
-
-    .math-lg {
-      margin-top: 40%;
-      margin-bottom: 40%;
-    }
-
 
   </style>
 
@@ -66,8 +51,8 @@
                 onclick="window.location.href='plotter.html'">
           Start Plotting!
         </button>
-        <br>
-        <p id="device-no" class="text-center" style="display:none">It seems your device won't support plotting.</p>
+        <!-- <br>
+        <p id="device-no" class="text-center" style="display:none">It seems your device won't support plotting.</p> -->
       </div>
       <div class="col-md-4"></div>
 
@@ -132,11 +117,11 @@
 </div>
 
 <script>
-
-  if (/Android|Mobile|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-    document.getElementById('start-plotting').disabled = true;
-    document.getElementById('device-no').style.display = "block";
-  }
+  //
+  // if (/Android|Mobile|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+  //   document.getElementById('start-plotting').disabled = true;
+  //   document.getElementById('device-no').style.display = "block";
+  // }
 
 </script>
 
