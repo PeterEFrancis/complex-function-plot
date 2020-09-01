@@ -75,14 +75,14 @@
         <p id="plain-text-error" style="color:red; display: none; font-size: 11pt;"></p>
       </div>
       <div class="row" style="margin-bottom: 40px;">
-        <div class="col-xs-6">
+        <div class="col-sm-6">
           <div class="input-group">
             <input id="re-lb" type="number" class="form-control" value="-2"/>
             <span class="input-group-addon">\(\leq \text{Re}(z)\leq\)</span>
             <input id="re-ub" type="number" class="form-control" value="2"/>
           </div>
         </div>
-        <div class="col-xs-6">
+        <div class="col-sm-6">
           <div class="input-group">
             <input id="im-lb" type="number" class="form-control" value="-2"/>
             <span class="input-group-addon">\(\leq \text{Im}(z)\leq\)</span>
@@ -98,7 +98,7 @@
         <span class="input-group-addon">pixels</span>
       </div>
       <div class="row" style="margin-bottom: 40px">
-        <div class="col-xs-6">
+        <div class="col-sm-6">
           <h4>Domain Color Schemes</h4>
           <input type="radio" id="standard_domain_coloring" name="scheme" value="standard_domain_coloring" checked>
             <label for="standard_domain_coloring">&nbsp; Standard Domain Coloring</label><br>
@@ -123,7 +123,7 @@
             <input id="image-file" type="file" accept=".png,.jpg," onchange="loadFile(event)">
           <br>
         </div>
-        <div class="col-xs-6">
+        <div class="col-sm-6">
           <canvas id="domain" style="border: 1px solid black; width: 100%;" width="250" height="250"></canvas>
           <br>
           <label for="resolution">Resolution: </label><br>
