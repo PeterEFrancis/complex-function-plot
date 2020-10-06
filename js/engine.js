@@ -78,7 +78,7 @@ function round(p, depth_r, depth_i) {
 }
 
 function toString(p) {
-  return p.re + "+" + p.im + "i";
+  return p.re + (p.im >= 0 ? " + " : " - " ) + Math.abs(p.im) + "i";
 }
 
 output_canvas.addEventListener('mouseout', function() {

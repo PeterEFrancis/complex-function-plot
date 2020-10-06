@@ -142,6 +142,9 @@ function csc(a) {
   return {re: Math.sin(a.re) * r_cosh(a.im) / d,
           im: -Math.cos(a.re) * r_sinh(a.im) / d};
 }
+function root(a, b) {
+
+}
 
 
 
@@ -218,6 +221,11 @@ var complex_operations = {
   "squareroot":function(args){
     return function(vars){
       return exponential(args[0](vars), {re:1/2, im:0});
+    }
+  },
+  "root":function(args){
+    return function(vars){
+      return exponential(args[1](vars), divide({re:1,im:0}, args[0](vars)));
     }
   },
   "absolutevalue": function(args) {

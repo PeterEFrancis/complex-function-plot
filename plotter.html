@@ -128,7 +128,6 @@
           <input id="resolution" type="range" min="1" max="15" value="10" oninput="set_resolution(this.value)"/>
           <input type="checkbox" id="image-tiling" onchange="set_image_tiling(this.checked);"/>
           <label for="image-tiling"> Tile Image</label>
-
         </div>
       </div>
       <button type="button" class="btn btn-primary btn-lg btn-block" onclick="render()">Render</button>
@@ -137,7 +136,7 @@
     </div>
     <div class="col-lg-6">
       <canvas id="output" class="center-block"></canvas>
-      <p class="text-center" id="hover-loc">&nbsp;</p>
+      <p class="text-center" id="hover-loc" style="font-family: 'Latin Modern Math';">&nbsp;</p>
       <button onclick="download_output();" type="button" class="btn btn-default center-block"><span class="glyphicon glyphicon-download-alt"></span> Download Image</button>
     </div>
   </div>
