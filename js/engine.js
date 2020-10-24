@@ -78,7 +78,7 @@ function round(p, depth_r, depth_i) {
 }
 
 function toString(p) {
-  return p.re + (p.im >= 0 ? " + " : " - " ) + Math.abs(p.im) + "i";
+  return (p.re < 0 ? "−" + Math.abs(p.re) : p.re) + (p.im >= 0 ? " + " : " − " ) + Math.abs(p.im) + "i";
 }
 
 output_canvas.addEventListener('mouseout', function() {
@@ -91,7 +91,7 @@ output_canvas.addEventListener('mousemove', function(e) {
     var user_x = (e.clientX - rect.left) * (output_canvas.width / output_canvas.clientWidth);
     var user_y = (e.clientY - rect.top) * (output_canvas.height / output_canvas.clientHeight);
     var p = get_C_point({x:user_x, y:user_y});
-    document.getElementById('hover-loc').innerHTML = "f(" + toString(round(p, depth_re, depth_im)) + ") = " + toString(round(func(p), depth_re, depth_im));
+    document.getElementById('hover-loc').innerHTML = "ƒ(" + toString(round(p, depth_re, depth_im)) + ") = " + toString(round(func(p), depth_re, depth_im));
   } catch(e) {
     // if no image is loaded, this wont work, so this is ok
   }
