@@ -61,7 +61,7 @@ function multiply(a,b) {
 }
 function divide(a,b) {
   return {re: (a.re * b.re + a.im * b.im) / (b.re**2 + b.im**2),
-          im: (a.im * b.im - a.re * b.im) / (b.re**2 + b.im**2)};
+          im: (a.im * b.re - a.re * b.im) / (b.re**2 + b.im**2)};
 }
 function negate(a) {
   return {re:-a.re, im:-a.im};
