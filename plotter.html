@@ -73,6 +73,14 @@
       <p id="plain-text-error" style="color:red; display: none; font-size: 11pt;"></p>
       <br>
       <div class="row" style="margin-bottom: 40px;">
+        <div class="col-sm-12">
+          <div class="input-group">
+            <span class="input-group-addon">Number of iterations</span>
+            <input id="iterations" type="number" class="form-control" value="1" oninput="this.value=this.value.split('').filter(x => '1234567890'.includes(x)).join('')"/>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-bottom: 40px;">
         <div class="col-sm-6">
           <div class="input-group">
             <input id="re-lb" type="number" class="form-control" value="-2"/>

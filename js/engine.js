@@ -10,6 +10,8 @@ var guppy_input = new Guppy('guppy-function-input');
 
 var func;
 
+var iterations;
+
 var re_lb, re_ub;
 var im_lb, im_ub;
 var disc_re, disc_im;
@@ -34,6 +36,8 @@ var mode = "guppy";
 
 
 function get_settings() {
+
+  iterations = Math.round(Number(document.getElementById('iterations').value));
 
   re_lb = Number(document.getElementById('re-lb').value);
   re_ub = Number(document.getElementById('re-ub').value);
@@ -137,9 +141,13 @@ function render() {
 
     // parse with guppy
     try {
-      var f = guppy_input.func(complex_operations);
+      const f = guppy_input.func(complex_operations);
       func = function(z) {
-        return f({'z':z});
+        let ret = {'z':z};
+        for (let i = 0; i < iterations; i++) {
+          ret = {'z': f(ret)};
+        }
+        return ret['z'];
       }
     } catch(e) {
       throw "Error parsing the input f(z)";
