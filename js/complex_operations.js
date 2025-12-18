@@ -9,10 +9,10 @@
 // real -> real functions
 
 function r_cosh(x) {
-    return (Math.exp(x) + Math.exp(-x)) * 0.5;
+    return (Math.exp(x) + Math.exp(0-x)) * 0.5;
   };
 function r_sinh(x) {
-    return (Math.exp(x) - Math.exp(-x)) * 0.5;
+    return (Math.exp(x) - Math.exp(0-x)) * 0.5;
   };
 
 
@@ -84,7 +84,7 @@ function exponential(a,b) {
       switch ((b.re % 4 + 4) % 4) {
         case 0: return {re:Math.pow(a.im, b.re), im:0};
         case 1: return {re:0, im:Math.pow(a.im, b.re)};
-        case 2: return {re:-Math.pow(a.im, b.re), im:0};
+        case 2: return {re:0-Math.pow(a.im, b.re), im:0};
         case 3: return {re:0, im:-Math.pow(a.im, b.re)};
       }
     }
@@ -106,9 +106,17 @@ function modulus(a) {
   return {re:Math.sqrt(a.re**2 + a.im**2),
           im:0};
 }
+function argument(a) {
+  let theta = Math.atan(a.im/a.re) + 2 * Math.PI;
+  if (a.re < 0) {
+    theta += Math.PI;
+  }
+  theta = theta % (2 * Math.PI);
+  return {re:theta, im:0};
+}
 function conjugate(a) {
   return {re:a.re,
-          im:-a.im};
+          im:0-a.im};
 }
 function sin(a) {
   return {re:Math.sin(a.re) * r_cosh(a.im),
@@ -116,7 +124,7 @@ function sin(a) {
 }
 function cos(a) {
   return {re:Math.cos(a.re) * r_cosh(a.im),
-          im:-Math.sin(a.re) * r_sinh(a.im)};
+          im:0-Math.sin(a.re) * r_sinh(a.im)};
 }
 function tan(a) {
   const d = Math.cos(a.re) + r_cosh(a.im);
@@ -129,7 +137,7 @@ function log(a) {
 }
 function cot(a) {
   const d = Math.cos(2 * a.re) - r_cosh(2 * a.im);
-  return {re:-Math.sin(2 * a.re) / d,
+  return {re:0-Math.sin(2 * a.re) / d,
           im:r_sinh(2 * a.im) / d};
 }
 function sec(a) {
@@ -140,7 +148,7 @@ function sec(a) {
 function csc(a) {
   const d = 0.5 * (r_cosh(2 * a.im) - Math.cos(2 * a.re));
   return {re: Math.sin(a.re) * r_cosh(a.im) / d,
-          im: -Math.cos(a.re) * r_sinh(a.im) / d};
+          im: 0-Math.cos(a.re) * r_sinh(a.im) / d};
 }
 function root(a, b) {
 
@@ -198,6 +206,8 @@ var complex_operations = {
 
       if (args[0] === "x")  return {re: vars.z.re, im: 0};
       if (args[0] === "y")  return {re: vars.z.im, im: 0};
+      if (args[0] === "r")  return modulus(vars.z);
+      if (args[0] === "theta") return argument(vars.z);  
 
       return vars[args[0]];
     }
