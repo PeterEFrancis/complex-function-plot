@@ -64,7 +64,7 @@ function divide(a,b) {
           im: (a.im * b.re - a.re * b.im) / (b.re**2 + b.im**2)};
 }
 function negate(a) {
-  return {re:-a.re, im:-a.im};
+  return {re:0-a.re, im:0-a.im};
 }
 function subtract(a,b) {
   return {re: a.re - b.re,
@@ -195,6 +195,10 @@ var complex_operations = {
       if(args[0] == "pi") return {re:Math.PI, im:0};
       if(args[0] == "e") return {re:Math.E, im:0};
       if(args[0] == "i") return {re:0, im:1};
+
+      if (args[0] === "x")  return {re: vars.z.re, im: 0};
+      if (args[0] === "y")  return {re: vars.z.im, im: 0};
+
       return vars[args[0]];
     }
   },

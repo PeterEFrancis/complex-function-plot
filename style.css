@@ -58,3 +58,28 @@ p, li {
   margin-top: 40%;
   margin-bottom: 40%;
 }
+
+.katex .cursor {
+    border-left: 1px solid black !important;
+/*    width: 0 !important;*/
+    margin-right: 0 !important;
+    margin-left: -1px;
+    min-height: 1ex;
+    color: grey;
+    height: 1em;
+    margin-bottom: -0.25em;
+/*    display: none;*/
+}
+
+.guppy_active .main_cursor {
+    animation: blink-animation 1s steps(2,start) infinite;
+    -webkit-animation: blink-animation 1s steps(2,start) infinite;
+    border-left: 1px solid black !important;
+    width: 0 !important;
+    margin-right: 0 !important;
+    margin-left: -1px;
+    height: 1em !important;
+    margin-bottom: -0.25em;
+    display: inline-block;
+}
+

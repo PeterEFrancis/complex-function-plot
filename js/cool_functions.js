@@ -4,3 +4,6 @@ var three = '<m v="1.2.0"><e></e><f type="exponential" group="functions"><b p="l
 
 
 var fractions = '<m v="1.2.0"><e></e><f type="fraction" group="functions"><b p="latex">\\dfrac{<r ref="1"/>}{<r ref="2"/>}</b><b p="small_latex">\\frac{<r ref="1"/>}{<r ref="2"/>}</b><b p="asciimath">(<r ref="1"/>)/(<r ref="2"/>)</b><c up="1" down="2" name="numerator"><e>i</e></c><c up="1" down="2" delete="1" name="denominator"><e>z</e></c></f><e>-</e><f type="fraction" group="functions"><b p="latex">\\dfrac{<r ref="1"/>}{<r ref="2"/>}</b><b p="small_latex">\\frac{<r ref="1"/>}{<r ref="2"/>}</b><b p="asciimath">(<r ref="1"/>)/(<r ref="2"/>)</b><c up="1" down="2" name="numerator"><e>z</e></c><c up="1" down="2" delete="1" name="denominator"><e>i</e></c></f><e></e></m>'
+
+var neg_i = '<m v="1.2.0"><e>-</e><e>i</e></m>';
+var x = '<m v="1.2.0"><e>x</e></m>';

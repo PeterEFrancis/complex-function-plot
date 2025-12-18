@@ -65,20 +65,25 @@ function get_settings() {
 
 function get_output_canvas_point(p) {
   // given a point in C, get the output_canvas coordinate point to plot
-  return {x: (p.re - re_lb) * zoom_re,
-          y: (im_ub - p.im) * zoom_im};
+  return {
+    x: (p.re - re_lb) * zoom_re,
+    y: (im_ub - p.im) * zoom_im
+  };
 }
 
 function get_C_point(p) {
   // given the output_canvas coordinate point, get a point in C
-  return {re: p.x / zoom_re + re_lb,
-          im: im_ub - p.y / zoom_im};
+  return {
+    re: p.x / zoom_re + re_lb,
+    im: im_ub - p.y / zoom_im
+  };
 }
 
 function round(p, depth_r, depth_i) {
-  return {re: (Math.round(p.re * depth_r) / depth_r),
-          im: (Math.round(p.im * depth_i) / depth_i)
-         };
+  return {
+    re: (Math.round(p.re * depth_r) / depth_r),
+    im: (Math.round(p.im * depth_i) / depth_i)
+  };
 }
 
 function toString(p) {
@@ -159,8 +164,10 @@ function render() {
     // iterate over points in the output display, and plot the color associated with their output of f
     for (var i = 0; i < disc_re; i++) {
       for (var j = 0; j < disc_im; j++) {
-        output_ctx.fillStyle = get_color(func(get_C_point({x:i,y:j})));
+        let output_point = func(get_C_point({x:i,y:j}));
+        output_ctx.fillStyle = get_color(output_point);
         this.output_ctx.fillRect(i, j, 1, 1);
+
       }
     }
 
@@ -238,12 +245,11 @@ function preview_domain() {
 
 
 
-
-
 guppy_input.engine.add_symbol("conj", {"output": {"latex":"\\overline{{$1}}", "text":"conj($1)"}, "attrs": { "type":"conj", "group":"function"}});
 guppy_input.engine.add_symbol("Re", {"output": {"latex":"\\text{Re}({$1})", "text":"Re($1)"}, "attrs": { "type":"Re", "group":"function"}});
 guppy_input.engine.add_symbol("Im", {"output": {"latex":"\\text{Im}({$1})", "text":"Im($1)"}, "attrs": { "type":"Im", "group":"function"}});
 guppy_input.engine.set_content(fractions);
+
 guppy_input.engine.end();
 guppy_input.render(true);
 
