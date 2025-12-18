@@ -243,8 +243,8 @@ function preview_domain() {
 guppy_input.engine.add_symbol("conj", {"output": {"latex":"\\overline{{$1}}", "text":"conj($1)"}, "attrs": { "type":"conj", "group":"function"}});
 guppy_input.engine.add_symbol("Re", {"output": {"latex":"\\text{Re}({$1})", "text":"Re($1)"}, "attrs": { "type":"Re", "group":"function"}});
 guppy_input.engine.add_symbol("Im", {"output": {"latex":"\\text{Im}({$1})", "text":"Re($1)"}, "attrs": { "type":"Im", "group":"function"}});
-guppy_input.engine.add_symbol("x", {"output": {"latex":"\\text{Re}({$1})", "text":"Re($1)"}, "attrs": { "type":"Re", "group":"function"}});
-guppy_input.engine.add_symbol("y", {"output": {"latex":"\\text{Im}({$1})", "text":"Re($1)"}, "attrs": { "type":"Im", "group":"function"}});
+guppy_input.engine.add_symbol("x", {"output": {"latex":"\\text{Re}({z})", "text":"Re(z)"}, "attrs": { "type":"Re", "group":"function"}});
+guppy_input.engine.add_symbol("y", {"output": {"latex":"\\text{Im}({z})", "text":"Re(z)"}, "attrs": { "type":"Im", "group":"function"}});
 guppy_input.engine.set_content(fractions);
 guppy_input.engine.end();
 guppy_input.render(true);
